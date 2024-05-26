@@ -1,0 +1,124 @@
+
+# Instructions :
+
+'''
+
+1. Rock beats Scissor
+2. Scissor beats Paper
+3. Paper beats Rock
+
+'''
+
+
+import random
+
+print("Welcome to play Rock Paper Scissor Game ")
+
+def Rock_Paper_Scissor(user_choice , level) :
+
+    if level == "Hard": attempts = 5
+
+    elif level == "Medium": attempts = 7
+
+    elif level == "Easy" : attempts = 10
+
+    else : print("Invalid Entry")
+
+    User_Score = 0
+    Computer_Score = 0
+    Draw_Score = 0
+    game_end = True
+
+    list_a = ["Rock", "Paper", "Scissor"]
+
+    while game_end:
+
+        computer_choice = random.choice(list_a)  # computer generates a random name present in list_a
+
+        if user_choice == computer_choice :
+
+            print("It's a draw\n")
+            Draw_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Rock" and computer_choice == "Scissor":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Rock beats Scissor . So User wins and you got a point\n")
+            User_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Scissor" and computer_choice == "Rock":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Rock beats Scissor . So Computer wins and gains a point\n ")
+            Computer_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Scissor" and computer_choice == "Paper":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Scissor beats Paper . So User wins and you got a point\n ")
+            User_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Paper" and computer_choice == "Scissor":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Scissor beats Paper . So Computer wins and gains a point\n ")
+            Computer_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Paper" and computer_choice == "Rock":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Paper beats Rock . So User wins and you got a point\n ")
+            User_Score += 1
+            attempts -= 1
+
+        elif user_choice == "Rock" and computer_choice == "Paper":
+
+            print(f"Computer choice is : {computer_choice}")
+            print("Paper beats Rock . So Computer wins and gains a point\n ")
+            Computer_Score += 1
+            attempts -= 1
+
+        if attempts == 0:
+
+            print(f"You have {attempts} attempts now\n")
+            print(f"User Score : {User_Score}")
+            print(f"Computer Score : {Computer_Score}")
+            print(f"Draw Score : {Draw_Score}\n")
+
+            if Computer_Score < User_Score > Draw_Score : print("User wins ")
+
+            elif User_Score < Computer_Score > Draw_Score: print("Computer wins ")
+
+            elif User_Score < Draw_Score > Computer_Score: print("It's a Draw match")
+
+            elif User_Score == Computer_Score: print("Both User and Computer Wins")
+
+            elif Computer_Score == Draw_Score: print("Computer wins")
+
+            elif User_Score == Draw_Score: print("User Wins")
+
+            game_end = False
+
+            return False
+
+        user_choice = input("Enter again! : ")
+
+
+level = input("Select the level ( Easy / Medium / Hard ) : ")
+
+if level == "Hard" : print("You have 5 attempts\n")
+
+elif level == "Medium" : print("You have 7 attempts\n")
+
+elif level == "Easy" : print("You have 10 attempts\n")
+
+else : print("Invalid Entry\n")
+
+user_choice = input("Enter Your Choice (Rock / Paper / Scissor ) : ")
+
+Rock_Paper_Scissor(user_choice, level)
