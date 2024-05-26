@@ -1,0 +1,113 @@
+Menu = {
+    "espresso": {
+
+        "ingredients": {
+            "water": 150,
+            "milk": 250,
+            "coffee": 50
+        },
+
+        "cost": 150
+    },
+
+    "cappuccino": {
+
+        "ingredients": {
+            "water": 150,
+            "milk": 200,
+            "coffee": 30
+        },
+
+        "cost": 170
+    },
+
+    "latte": {
+
+        "ingredients": {
+            "water": 150,
+            "milk": 200,
+            "coffee": 40
+        },
+
+        "cost": 200
+    }
+}
+
+Resources = {
+
+        "water": 1000,
+        "milk": 500,
+        "coffee": 250
+}
+
+profit = 0
+
+def check_resources(order_ingredients):
+
+    for item in order_ingredients:
+
+        if order_ingredients[item] > Resources[item]:
+            print(f"Insufficient resources {item}")
+            return False
+    return True
+
+def process_coins():
+
+    print("Please insert a coin ")
+    total = 0
+    coins_five = int(input("How many 5rs coins? : "))
+    coins_ten = int(input("How many 10rs coins? : "))
+    coins_twenty = int(input("How many 20rs coins? :"))
+
+    total += coins_five * 5 + coins_ten * 10 + coins_twenty * 20
+
+    return total
+
+def is_payment_successful(money_received, coffee_cost):
+
+    if money_received >= coffee_cost:
+        global profit
+        profit += coffee_cost
+        # remaining money is stored in change variable
+
+        change = money_received - coffee_cost
+        print(f"Here is your {change} change")
+        return True
+
+    else:
+        print("Sorry that's not enough money. Money refunded")
+        return False
+
+def make_coffee(coffee_name, coffee_ingredients):
+
+    for item in coffee_ingredients :
+        Resources[item] -= coffee_ingredients[item]
+
+    print(f"Here is your {coffee_name}. Enjoy it !")
+
+
+is_on = True
+
+while is_on:
+
+    user_choice = input("Enter your choice (espresso / latte /  cappuccino / report / off)  : ")
+
+    if user_choice == "off":
+        is_on = False
+
+    elif user_choice == "report":
+
+        print(f"Water : {Resources['water']} ml")
+        print(f"milk : {Resources['milk']} ml")
+        print(f"coffee : {Resources['coffee']} gm")
+        print(f"Money : Rs.{profit}")
+
+    else:
+
+        coffee_type = Menu[user_choice]
+        print(coffee_type)
+
+        if check_resources(coffee_type['ingredients']):
+             payment = process_coins()
+             if is_payment_successful(payment, coffee_type['cost']):
+                 make_coffee (user_choice,coffee_type['ingredients'])
