@@ -1,0 +1,71 @@
+
+# Num Guessing
+
+# 1. import random module
+# 2. user input
+
+# case conditions :
+
+# 3. user == computer ; user win
+# 4. user > computer ; too high
+# 5. user < computer ; too low
+
+# 6. counter  : no of attempts
+
+# 7. hard : 5 attempts
+# 8. easy : 10 attempts
+
+import random
+
+def num_guessing_game(user_input , level):
+
+    if level == "Hard":
+        attempt = 5
+    else:
+        attempt = 10
+
+    count = 0
+    computer_guess = random.randint(1, 100)
+    game_end = False
+
+    while not game_end:
+
+        if user_input == computer_guess:
+            print(f"You win in {count+1} attempts")
+            game_end = True
+            return True
+
+        elif user_input > computer_guess :
+            print("Your input is Too High")
+            print(f"You have {attempt-1} attempts remain")
+            attempt -= 1
+            count += 1
+
+        elif user_input < computer_guess :
+            print("Your input is Too Low")
+            print(f"You have {attempt-1} attempts remain")
+            attempt -= 1
+            count += 1
+
+        if attempt == 0:
+
+            print(f"you have {attempt} attempts SO You Lost the Game and guessing number is {computer_guess}")
+            game_end = True
+            return False
+
+        user_input = int(input("Enter again :"))
+
+
+
+print("Welcome to Number Guessing game !")
+
+level = input("Select level type 'Hard' or 'Easy' : ")
+
+if level == "Hard":
+    print("You may have 5 attempts to guess the number \n")
+else:
+    print("You may have 10 attempts to guess the number \n")
+
+user_input = int(input("Enter the input value from 1 to 100 : "))
+
+num_guessing_game(user_input = user_input, level = level)
